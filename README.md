@@ -1,4 +1,4 @@
 Wiby Travel Foundation
 ====================
 
-Sistem Informasi Travel Mobil
+Sistem Informasi Travel Mobil Wiby
