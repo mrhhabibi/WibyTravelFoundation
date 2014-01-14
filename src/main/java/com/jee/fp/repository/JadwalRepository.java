@@ -10,4 +10,5 @@ public interface JadwalRepository {
 	void tambah(Jadwal jadwal);
 	void hapus(int id);
 	Jadwal getData(int id);
+	List<String> getKota();
 }

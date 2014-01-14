@@ -39,9 +39,32 @@ public class AnggotaController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/register", method = RequestMethod.GET)
+	public ModelAndView registerAnggota() {
+		ModelAndView mv=new ModelAndView("register");
+		mv.addObject("anggotaBean",new Anggota());
+		return mv;
+	}
+
+	@RequestMapping(value="/registerProcess", method = RequestMethod.POST)
+	public ModelAndView registerProcess(@ModelAttribute Anggota anggota) {
+		ModelAndView mv=new ModelAndView("login");
+		mv.addObject("anggotaBean",new Anggota());
+		this.anggotaRepository.tambah(anggota);
+		return mv;
+	}
+	
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public ModelAndView userProfile() {
 		ModelAndView mv = new ModelAndView("user");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/logout")
+	public ModelAndView logoutProcess() {
+		ModelAndView mv = new ModelAndView("home");
+		mv.addObject("anggotaObj",null);
+		mv.addObject("bookObj",null);	
 		return mv;
 	}
 }

@@ -49,7 +49,7 @@
 					id="tologin"></a>
 				<div id="wrapper">
 					<div id="login" class="animate form">
-						<form:form method="post" action="registeranggota"
+						<form:form method="post" action="registerProcess"
 							commandName="anggotaBean">
 							<h1>Registrasi</h1>
 							<p>

@@ -12,8 +12,16 @@
 </head>
 <body>
 	<h1>Wiby Travel Foundation</h1>
-	<input type="submit" value="Login/Register"
-		onclick="window.location.href='/fp/login'" />
+	<c:choose>
+		<c:when test="${anggotaObj == null}">
+			<input type="submit" value="Login/Register"
+				onclick="window.location.href='/fp/login'" />
+		</c:when>
+		<c:otherwise>
+			<input type="submit" value="Logout"
+				onclick="window.location.href='/fp/logout'" />
+		</c:otherwise>
+	</c:choose>
 	<br>
 	<h2>Silahkan Cari Tujuan Anda!</h2>
 
@@ -46,8 +54,6 @@
 	</form:form>
 
 	<table border="1">
-		<thead>Jadwal Travel
-		</thead>
 		<tbody>
 			<tr>
 				<td><b>Kota Asal</b></td>
@@ -55,7 +61,9 @@
 				<td><b>Tanggal</b></td>
 				<td><b>Waktu</b></td>
 				<td><b>Kuota</b></td>
-				<td />
+				<c:if test="${anggotaObj!=null}">
+					<td />
+				</c:if>
 			</tr>
 			<c:forEach var="jadwal" items="${jadwals}">
 				<tr>
@@ -64,11 +72,16 @@
 					<td><c:out value="${jadwal.tanggal}"></c:out></td>
 					<td><c:out value="${jadwal.waktu}"></c:out></td>
 					<td><c:out value="${jadwal.kuota}"></c:out></td>
-					<td><input type="submit" value="Book"
-						onclick="window.location.href='book/${jadwal.id}'" /></td>
+					<c:if test="${anggotaObj!=null}">
+						<td><input type="submit" value="Book"
+							onclick="window.location.href='book/${jadwal.id}'" /></td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<c:if test="${anggotaObj==null}">
+		<h3>Silahkan Login/Register untuk Booking</h3>
+	</c:if>
 </body>
 </html>
