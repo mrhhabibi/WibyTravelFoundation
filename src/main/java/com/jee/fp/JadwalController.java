@@ -25,6 +25,7 @@ public class JadwalController {
 
 	@Autowired
 	private JadwalRepository jadwalRepository;
+	private int kuota;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -42,6 +43,7 @@ public class JadwalController {
 		mv.addObject("kotaList", this.jadwalRepository.getKota());
 		mv.addObject("jadwals",
 				this.jadwalRepository.getData(null, null, null, 0));
+		this.kuota = jadwal.getKuota();
 		return mv;
 	}
 
@@ -50,7 +52,8 @@ public class JadwalController {
 		ModelAndView mv = new ModelAndView("book");
 		mv.addObject("jadwalBean", this.jadwalRepository.getData(jadwalId));
 		mv.addObject("transaksiBean",
-				new Transaksi(this.jadwalRepository.getData(jadwalId)));
+				new Transaksi(this.jadwalRepository.getData(jadwalId), kuota));
+		mv.addObject("kuotaText", kuota);
 		return mv;
 	}
 
@@ -69,12 +72,11 @@ public class JadwalController {
 		mv.addObject("transaksiObj", transaksi);
 		return mv;
 	}
-	
 
 	@RequestMapping(value = "/book/batal")
 	public ModelAndView batalTransaksi() {
 		ModelAndView mv = new ModelAndView("user");
-		mv.addObject("transaksiBean",new Transaksi());
+		mv.addObject("transaksiBean", new Transaksi());
 		return mv;
 	}
 

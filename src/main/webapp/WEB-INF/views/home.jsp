@@ -69,7 +69,7 @@
 		<tbody>
 			<tr>
 				<td><b>Kota Asal</b></td>
-				<td><b>Kota Tujaun</b></td>
+				<td><b>Kota Tujuan</b></td>
 				<td><b>Tanggal</b></td>
 				<td><b>Waktu</b></td>
 				<td><b>Kuota</b></td>

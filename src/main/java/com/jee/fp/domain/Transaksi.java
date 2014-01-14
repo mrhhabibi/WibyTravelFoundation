@@ -11,13 +11,15 @@ public class Transaksi {
 	private String rekening;
 	private String an;
 	private String batas;
+	private int kuota;
 
 	public Transaksi() {
 		setBatas(null);
 	}
 
-	public Transaksi(Jadwal jadwal) {
+	public Transaksi(Jadwal jadwal, int kuota) {
 		this.jadwal = jadwal;
+		this.kuota = kuota;
 		setBatas(null);
 	}
 
@@ -75,5 +77,13 @@ public class Transaksi {
 
 	public void setBatas(String batas) {
 		this.batas = batas;
+	}
+
+	public int getKuota() {
+		return kuota;
+	}
+
+	public void setKuota(int kuota) {
+		this.kuota = kuota;
 	}
 }

@@ -21,20 +21,20 @@
 					<td><form:label path="kotaAsal" />${jadwalBean.kotaAsal}</td>
 				</tr>
 				<tr>
-					<td><form:label path="kotaAsal">Kota Tujaun: </form:label></td>
-					<td><form:label path="kotaAsal" />${jadwalBean.kotaTujuan}</td>
+					<td><form:label path="kotaTujuan">Kota Tujaun: </form:label></td>
+					<td><form:label path="kotaTujuan" />${jadwalBean.kotaTujuan}</td>
 				</tr>
 				<tr>
-					<td><form:label path="kotaAsal">Tanggal: </form:label></td>
-					<td><form:label path="kotaAsal" />${jadwalBean.tanggal}</td>
+					<td><form:label path="tanggal">Tanggal: </form:label></td>
+					<td><form:label path="tanggal" />${jadwalBean.tanggal}</td>
 				</tr>
 				<tr>
-					<td><form:label path="kotaAsal">Waktu: </form:label></td>
-					<td><form:label path="kotaAsal" />${jadwalBean.waktu}</td>
+					<td><form:label path="waktu">Waktu: </form:label></td>
+					<td><form:label path="waktu" />${jadwalBean.waktu}</td>
 				</tr>
 				<tr>
-					<td><form:label path="kotaAsal">Kuota: </form:label></td>
-					<td><form:label path="kotaAsal" />${jadwalBean.kuota}</td>
+					<td><form:label path="kuota">Kuota: </form:label></td>
+					<td>${kuotaText}</td>
 				</tr>
 			</form:form>
 			<form:form method="post" action="bookNow" commandName="transaksiBean">
