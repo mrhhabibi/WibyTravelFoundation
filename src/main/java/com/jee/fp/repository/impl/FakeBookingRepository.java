@@ -14,8 +14,8 @@ public class FakeBookingRepository implements BookingRepository {
 
 	@Override
 	public List<Booking> getAll() {
-		bookings.add(new Booking(null,null,"8763823","Habibi","12/12/12 12:12"));
-		bookings.add(new Booking(null,null,"7862362","Wiby","9/2/11 13:12"));
+		bookings.add(new Booking(null,null,"8763823","Habibi","12/12/12 12:12",2));
+		bookings.add(new Booking(null,null,"7862362","Wiby","9/2/11 13:12",3));
 		return null;
 	}
 

@@ -6,18 +6,20 @@ public class Booking {
 	private String rekening;
 	private String an;
 	private String batas;
+	private int kuota;
 
 	public Booking() {
 		setBatas(null);
 	}
 
 	public Booking(Anggota anggota, Jadwal jadwal, String rekening, String an,
-			String batas) {
+			String batas, int kuota) {
 		this.anggota = anggota;
 		this.jadwal = jadwal;
 		this.rekening = rekening;
 		this.an = an;
 		this.batas = batas;
+		this.kuota = kuota;
 	}
 
 	public String getRekening() {
@@ -58,5 +60,13 @@ public class Booking {
 
 	public void setJadwal(Jadwal jadwal) {
 		this.jadwal = jadwal;
+	}
+
+	public int getKuota() {
+		return kuota;
+	}
+
+	public void setKuota(int kuota) {
+		this.kuota = kuota;
 	}
 }

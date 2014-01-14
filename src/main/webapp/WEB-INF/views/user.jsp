@@ -12,8 +12,11 @@
 </head>
 <body>
 	<h1>Selamat Datang ${anggotaObj.nama}</h1>
-	<input type="submit" value="Book Something"
-		onclick="window.location.href='/fp'" />
+
+	<c:if test="${bookingBean.batas == null}">
+		<input type="submit" value="Book Something"
+			onclick="window.location.href='/fp'" />
+	</c:if>
 	<input type="submit" value="Logout"
 		onclick="window.location.href='/fp/login'" />
 	<br>
@@ -23,7 +26,9 @@
 		</c:when>
 		<c:otherwise>
 			<h2>Reminder : Waktu anda melakukan pembayaran hingga
-				${transaksiBean.batas}</h2>
+				${bookingBean.batas}</h2>
+			<input type="submit" value="Konfimarsi"
+				onclick="window.location.href='/fp/book/batal'" />
 			<input type="submit" value="Batal"
 				onclick="window.location.href='/fp/book/batal'" />
 		</c:otherwise>

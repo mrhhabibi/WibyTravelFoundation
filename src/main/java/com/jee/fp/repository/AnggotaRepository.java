@@ -9,4 +9,5 @@ public interface AnggotaRepository {
 	void tambah(Anggota anggota);
 	void hapus(String username);
 	Anggota login(Anggota anggota);
+	void simpan(Anggota anggota);
 }

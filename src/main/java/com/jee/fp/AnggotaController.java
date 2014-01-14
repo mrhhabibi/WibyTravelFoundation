@@ -122,12 +122,12 @@ public class AnggotaController {
 		mv.addObject("jadwalBean", this.jadwalRepository.getData(jadwalId));
 		mv.addObject("bookingBean",
 				new Booking(null, this.jadwalRepository.getData(jadwalId), "",
-						"", ""));
+						"", "",2));
 		return mv;
 	}
 
 	@RequestMapping(value = "/book/bookNow")
-	public ModelAndView bookTransaksi(@ModelAttribute Transaksi transaksi) {
+	public ModelAndView bookTransaksi(@ModelAttribute Booking booking) {
 		ModelAndView mv = new ModelAndView("user");
 
 		SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyy HH:mm");
@@ -136,9 +136,9 @@ public class AnggotaController {
 		cal.setTime(time1);
 		cal.add(Calendar.HOUR_OF_DAY, 1);
 		time1 = cal.getTime();
-		// transaksi.setbatas(parser.format(time1));
-		mv.addObject("transaksiBean", transaksi);
-		mv.addObject("transaksiObj", transaksi);
+		booking.setBatas(parser.format(time1));
+		
+		mv.addObject("bookingBean", booking);
 		return mv;
 	}
 

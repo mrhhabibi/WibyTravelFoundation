@@ -32,12 +32,12 @@
 					<td><form:label path="waktu">Waktu: </form:label></td>
 					<td><form:label path="waktu" />${jadwalBean.waktu}</td>
 				</tr>
+			</form:form>
+			<form:form method="post" action="bookNow" commandName="bookingBean">
 				<tr>
 					<td><form:label path="kuota">Kuota: </form:label></td>
-					<td><form:label path="kuota" />${jadwalBean.kuota}</td>
+					<td><form:label path="kuota" />${bookingBean.kuota}</td>
 				</tr>
-			</form:form>
-			<form:form method="post" action="bookNow" commandName="transaksiBean">
 				<tr>
 					<td><form:label path="rekening">Nomor Rekening: </form:label></td>
 					<td><form:input path="rekening" /></td>
