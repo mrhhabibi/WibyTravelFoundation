@@ -5,15 +5,17 @@ public class Jadwal {
 	private String kotaAsal;
 	private String kotaTujuan;
 	private String tanggal;
+	private String waktu;
 	private int kuota;
 
 	public Jadwal() {
 
 	}
 
-	public Jadwal(int id, String kotaAsal, String kotaTujuan, String tanggal, int kuota) {
+	public Jadwal(int id, String kotaAsal, String kotaTujuan, String tanggal, String waktu, int kuota) {
 		this.id = id;
 		this.tanggal = tanggal;
+		this.waktu = waktu;
 		this.kuota = kuota;
 		this.kotaAsal = kotaAsal;
 		this.kotaTujuan = kotaTujuan;
@@ -57,5 +59,13 @@ public class Jadwal {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getWaktu() {
+		return waktu;
+	}
+
+	public void setWaktu(String waktu) {
+		this.waktu = waktu;
 	}
 }

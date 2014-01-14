@@ -11,36 +11,14 @@
 <title>Wiby Travel Foundation</title>
 </head>
 <body>
+	<h1>Wiby Travel Foundation</h1>
 	<input type="submit" value="Login/Register"
 		onclick="window.location.href='/fp/login'" />
 	<br>
-	<table border="1">
-		<thead>
-			Jadwal Travel
-		</thead>
-		<tbody>
-			<tr>
-				<td><b>Kota Asal</b></td>
-				<td><b>Kota Tujaun</b></td>
-				<td><b>Tanggal Keberangkatan</b></td>
-				<td><b>Kuota</b></td>
-			</tr>
-			<c:forEach var="jadwal" items="${jadwals}">
-				<tr>
-					<td><c:out value="${jadwal.kotaAsal}"></c:out></td>
-					<td><c:out value="${jadwal.kotaTujuan}"></c:out></td>
-					<td><c:out value="${jadwal.tanggal}"></c:out></td>
-					<td><c:out value="${jadwal.kuota}"></c:out></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	<h2>Silahkan Cari Tujuan Anda!</h2>
 
-	<form:form method="post" action="tambahjadwal" commandName="jadwalBean">
+	<form:form method="post" action="filterjadwal" commandName="jadwalBean">
 		<table>
-			<thead>
-				Tambahkan Jadwal
-			</thead>
 			<tbody>
 				<tr>
 					<td><form:label path="kotaAsal">Kota Asal: </form:label></td>
@@ -60,26 +38,34 @@
 				</tr>
 				<tr>
 					<td />
-					<td><input type="submit" value="Submit" />
+					<td><input type="submit" value="Cari" /> <a href="/fp">Tampilkan
+							Semua</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</form:form>
+
 	<table border="1">
-		<thead>
-			Daftar Anggota
+		<thead>Jadwal Travel
 		</thead>
 		<tbody>
 			<tr>
-				<td><b>Nama Lengkap</b></td>
-				<td><b>Email</b></td>
-				<td><b>Kontak</b></td>
+				<td><b>Kota Asal</b></td>
+				<td><b>Kota Tujaun</b></td>
+				<td><b>Tanggal</b></td>
+				<td><b>Waktu</b></td>
+				<td><b>Kuota</b></td>
+				<td />
 			</tr>
-			<c:forEach var="anggota" items="${anggotas}">
+			<c:forEach var="jadwal" items="${jadwals}">
 				<tr>
-					<td><c:out value="${anggota.nama}"></c:out></td>
-					<td><c:out value="${anggota.email}"></c:out></td>
-					<td><c:out value="${anggota.kontak}"></c:out></td>
+					<td><c:out value="${jadwal.kotaAsal}"></c:out></td>
+					<td><c:out value="${jadwal.kotaTujuan}"></c:out></td>
+					<td><c:out value="${jadwal.tanggal}"></c:out></td>
+					<td><c:out value="${jadwal.waktu}"></c:out></td>
+					<td><c:out value="${jadwal.kuota}"></c:out></td>
+					<td><input type="submit" value="Book"
+						onclick="window.location.href='book/${jadwal.id}'" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>

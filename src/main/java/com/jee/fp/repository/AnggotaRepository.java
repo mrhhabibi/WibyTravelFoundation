@@ -8,4 +8,5 @@ public interface AnggotaRepository {
 	List<Anggota> getData();
 	void tambah(Anggota anggota);
 	void hapus(String username);
+	Anggota login(Anggota anggota);
 }

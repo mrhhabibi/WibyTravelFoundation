@@ -14,11 +14,10 @@ public class FakeAnggotaRepository implements AnggotaRepository {
 	private List<Anggota> anggotas=new ArrayList<Anggota>();
 	
 	public FakeAnggotaRepository() {
-		anggotas.add(new Anggota("mrhabibi","Habibi","rizkyhabibi09@gmail.com","085733030815"));
-		anggotas.add(new Anggota("wiby","Wiby","wiby115@gmail.com","08348265254"));
-		anggotas.add(new Anggota("ilmi","Ilmi","ilmiandalan@gmail.com","0818762482"));
-		anggotas.add(new Anggota("rimby","Rimby","distributorsusu@gmail.com","08928394235"));
-	
+		anggotas.add(new Anggota("mrhabibi","Habibi","rizkyhabibi09@gmail.com","085733030815", "admin"));
+		anggotas.add(new Anggota("wiby","Wiby","wiby115@gmail.com","08348265254", "user"));
+		anggotas.add(new Anggota("ilmi","Ilmi","ilmiandalan@gmail.com","0818762482", "user"));
+		anggotas.add(new Anggota("rimby","Rimby","distributorsusu@gmail.com","08928394235", "user"));
 	}
 	
 	@Override
@@ -34,6 +33,11 @@ public class FakeAnggotaRepository implements AnggotaRepository {
 	@Override
 	public void hapus(String username) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public Anggota login(Anggota anggota) {
+		return anggotas.get(0);
 	}
 	
 }

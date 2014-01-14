@@ -5,16 +5,18 @@ public class Anggota {
 	private String nama;
 	private String email;
 	private String kontak;
+	private String tipe;
 	
 	public Anggota() {
 		
 	}
 	public Anggota(String password, String nama,
-			String email, String kontak) {
+			String email, String kontak, String tipe) {
 		this.nama = nama;
 		this.password = password;
 		this.email = email;
 		this.kontak = kontak;
+		this.tipe = tipe;
 	}
 	public String getNama() {
 		return nama;
@@ -39,6 +41,12 @@ public class Anggota {
 	}
 	public void setKontak(String kontak) {
 		this.kontak = kontak;
+	}
+	public String getTipe() {
+		return tipe;
+	}
+	public void setTipe(String tipe) {
+		this.tipe = tipe;
 	}
 	
 }

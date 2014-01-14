@@ -3,45 +3,58 @@ package com.jee.fp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jee.fp.domain.Jadwal;
-import com.jee.fp.repository.AnggotaRepository;
+import com.jee.fp.domain.Transaksi;
 import com.jee.fp.repository.JadwalRepository;
-import com.jee.fp.repository.impl.FakeAnggotaRepository;
-import com.jee.fp.repository.impl.FakeJadwalRepository;
 
 @Controller
-public class HomeController {
-	
+@SessionAttributes("bookObj")
+public class JadwalController {
+
 	@Autowired
 	private JadwalRepository jadwalRepository;
-	@Autowired
-	private AnggotaRepository anggotaRepository;
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mv=new ModelAndView("home");
-
 		mv.addObject("jadwals",this.jadwalRepository.getData());
-		mv.addObject("anggotas",this.anggotaRepository.getData());
 		mv.addObject("jadwalBean",new Jadwal());
 		mv.addObject("kotaList",getKota());
 		return mv;
 	}
 
-	@RequestMapping(value="/tambahjadwal", method=RequestMethod.POST)
+	@RequestMapping(value="/filterjadwal", method=RequestMethod.POST)
 	public ModelAndView tambahJadwal(@ModelAttribute Jadwal jadwal) {
-		ModelAndView mnv = new ModelAndView("redirect:/");
-		this.jadwalRepository.tambah(jadwal);
-		return mnv;
+		ModelAndView mv = new ModelAndView("home");
+		mv.addObject("jadwalBean",new Jadwal());
+		mv.addObject("kotaList",getKota());
+		mv.addObject("jadwals",this.jadwalRepository.getData(null,null,null,0));
+		return mv;
+	}
+	
+	@RequestMapping(value="/book/{jadwalId}")
+	public ModelAndView bookJadwal(@PathVariable("jadwalId") int jadwalId) {
+		ModelAndView mv = new ModelAndView("book");
+		mv.addObject("bookObj", jadwalRepository.getData(jadwalId));
+		mv.addObject("transaksiBean", new Transaksi());
+		mv.addObject("viaList", getVia());
+		return mv;
+	}
+
+	private List<String> getVia() {
+		List<String> vias = new ArrayList<String>();
+		vias.add("ATM");
+		vias.add("Teller");
+		return vias;
 	}
 	
 	private List<String> getKota() {
@@ -57,5 +70,4 @@ public class HomeController {
 		kotas.add("Bojonegoro");
 		return kotas;
 	}
-	
 }

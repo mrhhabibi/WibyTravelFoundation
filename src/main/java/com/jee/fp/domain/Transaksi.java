@@ -2,38 +2,45 @@ package com.jee.fp.domain;
 
 public class Transaksi {
 	private int id;
-	private String emailAnggota;
-	private int idJadwal;
-	private boolean status;
-	private int harga;
+	private Jadwal jadwal;
+	private Anggota anggota;
+	private String via;
+	private String rekening;
+	private String an;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getEmailAnggota() {
-		return emailAnggota;
+	public Anggota getAnggota() {
+		return anggota;
 	}
-	public void setEmailAnggota(String emailAnggota) {
-		this.emailAnggota = emailAnggota;
+	public void setAnggota(Anggota anggota) {
+		this.anggota = anggota;
 	}
-	public int getIdJadwal() {
-		return idJadwal;
+	public Jadwal getJadwal() {
+		return jadwal;
 	}
-	public void setIdJadwal(int idJadwal) {
-		this.idJadwal = idJadwal;
+	public void setJadwal(Jadwal jadwal) {
+		this.jadwal = jadwal;
 	}
-	public boolean isStatus() {
-		return status;
+	public String getRekening() {
+		return rekening;
 	}
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setRekening(String rekening) {
+		this.rekening = rekening;
 	}
-	public int getHarga() {
-		return harga;
+	public String getVia() {
+		return via;
 	}
-	public void setHarga(int harga) {
-		this.harga = harga;
+	public void setVia(String via) {
+		this.via = via;
+	}
+	public String getAn() {
+		return an;
+	}
+	public void setAn(String an) {
+		this.an = an;
 	}
 }
