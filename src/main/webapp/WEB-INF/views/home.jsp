@@ -17,7 +17,19 @@
 			<input type="submit" value="Login/Register"
 				onclick="window.location.href='/fp/login'" />
 		</c:when>
+		<c:when test="${anggotaObj.tipe=='admin'}">
+			<input type="submit" value="Jadwal"
+				onclick="window.location.href='/fp/jadwal'" />
+			<input type="submit" value="Anggota"
+				onclick="window.location.href='/fp/anggota'" />
+			<input type="submit" value="Laporan"
+				onclick="window.location.href='/fp/laporan'" />
+			<input type="submit" value="Logout"
+				onclick="window.location.href='/fp/logout'" />
+		</c:when>
 		<c:otherwise>
+			<input type="submit" value="Profil"
+				onclick="window.location.href='/fp/user'" />
 			<input type="submit" value="Logout"
 				onclick="window.location.href='/fp/logout'" />
 		</c:otherwise>

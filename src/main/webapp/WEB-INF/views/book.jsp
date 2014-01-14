@@ -8,39 +8,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Wiby Travel Foundation</title>
+<title>Booking</title>
 </head>
 <body>
 	<h2>Tentukan pilihan booking anda</h2>
 
 	<table>
 		<tbody>
-			<tr>
-				<td>Kota Asal:</td>
-				<td>${bookObj.kotaAsal}</td>
-			</tr>
-			<tr>
-				<td>Kota Tujuan:</td>
-				<td>${bookObj.kotaTujuan}</td>
-			</tr>
-			<tr>
-				<td>Tanggal:</td>
-				<td>${bookObj.tanggal}</td>
-			</tr>
-			<tr>
-				<td>Waktu:</td>
-				<td>${bookObj.waktu}</td>
-			</tr>
-			<tr>
-				<td>Kuota:</td>
-				<td>${bookObj.kuota}</td>
-			</tr>
-
-			<form:form method="post" action="bookNow" commandName="transaksiBean">
+			<form:form method="post" action="bookNow" commandName="jadwalBean">
 				<tr>
-					<td><form:label path="via">Pembayaran: </form:label></td>
-					<td><form:radiobuttons path="via" items="${viaList}"></form:radiobuttons></td>
+					<td><form:label path="kotaAsal">Kota Asal: </form:label></td>
+					<td><form:label path="kotaAsal" />${jadwalBean.kotaAsal}</td>
 				</tr>
+				<tr>
+					<td><form:label path="kotaAsal">Kota Tujaun: </form:label></td>
+					<td><form:label path="kotaAsal" />${jadwalBean.kotaTujuan}</td>
+				</tr>
+				<tr>
+					<td><form:label path="kotaAsal">Tanggal: </form:label></td>
+					<td><form:label path="kotaAsal" />${jadwalBean.tanggal}</td>
+				</tr>
+				<tr>
+					<td><form:label path="kotaAsal">Waktu: </form:label></td>
+					<td><form:label path="kotaAsal" />${jadwalBean.waktu}</td>
+				</tr>
+				<tr>
+					<td><form:label path="kotaAsal">Kuota: </form:label></td>
+					<td><form:label path="kotaAsal" />${jadwalBean.kuota}</td>
+				</tr>
+			</form:form>
+			<form:form method="post" action="bookNow" commandName="transaksiBean">
 				<tr>
 					<td><form:label path="rekening">Nomor Rekening: </form:label></td>
 					<td><form:input path="rekening" /></td>

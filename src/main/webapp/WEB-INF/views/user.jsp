@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Wiby Travel Foundation</title>
+<title>Profil</title>
 </head>
 <body>
 	<h1>Selamat Datang ${anggotaObj.nama}</h1>
@@ -17,7 +17,16 @@
 	<input type="submit" value="Logout"
 		onclick="window.location.href='/fp/login'" />
 	<br>
-	<h2>Reminder : </h2>
-	
+	<c:choose>
+		<c:when test="${transaksiBean.batas == null}">
+			<h2>Silahkan menuju halaman awal untuk melakukan booking</h2>
+		</c:when>
+		<c:otherwise>
+			<h2>Remainder : Waktu anda melakukan pembayaran hingga
+				${transaksiBean.batas}</h2>
+			<input type="submit" value="Batal"
+				onclick="window.location.href='/fp/book/batal'" />
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>

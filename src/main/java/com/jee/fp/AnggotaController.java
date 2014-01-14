@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jee.fp.domain.Anggota;
+import com.jee.fp.domain.Transaksi;
 import com.jee.fp.repository.AnggotaRepository;
 
 @Controller
@@ -22,6 +23,13 @@ public class AnggotaController {
 	public ModelAndView loginAnggota() {
 		ModelAndView mv = new ModelAndView("login");
 		mv.addObject("anggotaBean", new Anggota());
+		return mv;
+	}
+	
+	@RequestMapping(value = "/anggota", method = RequestMethod.GET)
+	public ModelAndView manageAnggota() {
+		ModelAndView mv = new ModelAndView("anggota");
+		mv.addObject("anggotas",this.anggotaRepository.getData());
 		return mv;
 	}
 
@@ -57,6 +65,7 @@ public class AnggotaController {
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public ModelAndView userProfile() {
 		ModelAndView mv = new ModelAndView("user");
+		mv.addObject("transaksiBean",new Transaksi());
 		return mv;
 	}
 	
