@@ -37,7 +37,7 @@ public class FakeAnggotaRepository implements AnggotaRepository {
 
 	@Override
 	public Anggota login(Anggota anggota) {
-		return anggotas.get(0);
+		return anggotas.get(1);
 	}
 	
 }

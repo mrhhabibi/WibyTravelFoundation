@@ -34,7 +34,7 @@
 				</tr>
 				<tr>
 					<td><form:label path="kuota">Kuota: </form:label></td>
-					<td>${kuotaText}</td>
+					<td><form:label path="kuota" />${jadwalBean.kuota}</td>
 				</tr>
 			</form:form>
 			<form:form method="post" action="bookNow" commandName="transaksiBean">

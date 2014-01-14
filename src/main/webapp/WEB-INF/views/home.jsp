@@ -34,66 +34,71 @@
 				onclick="window.location.href='/fp/logout'" />
 		</c:otherwise>
 	</c:choose>
-	<br>
-	<h2>Silahkan Cari Tujuan Anda!</h2>
+	<c:if test="${anggotaObj.tipe!='admin'}">
+		<br>
+		<h2>Silahkan Cari Tujuan Anda!</h2>
 
-	<form:form method="post" action="filterjadwal" commandName="jadwalBean">
-		<table>
+		<form:form method="post" action="filterjadwal"
+			commandName="jadwalBean">
+			<table>
+				<tbody>
+					<tr>
+						<td><form:label path="kotaAsal">Kota Asal: </form:label></td>
+						<td><form:select path="kotaAsal" items="${kotaList}"></form:select></td>
+					</tr>
+					<tr>
+						<td><form:label path="kotaTujuan">Kota Tujuan: </form:label></td>
+						<td><form:select path="kotaTujuan" items="${kotaList}"></form:select></td>
+					</tr>
+					<tr>
+						<td><form:label path="tanggal">Tanggal: </form:label></td>
+						<td><form:input path="tanggal" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="kuota">Kuota: </form:label></td>
+						<td><form:input path="kuota" /></td>
+					</tr>
+					<tr>
+						<td />
+						<td><input type="submit" value="Cari" /> <a href="/fp">Tampilkan
+								Semua</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</form:form>
+
+		<table border="1">
 			<tbody>
 				<tr>
-					<td><form:label path="kotaAsal">Kota Asal: </form:label></td>
-					<td><form:select path="kotaAsal" items="${kotaList}"></form:select></td>
-				</tr>
-				<tr>
-					<td><form:label path="kotaTujuan">Kota Tujuan: </form:label></td>
-					<td><form:select path="kotaTujuan" items="${kotaList}"></form:select></td>
-				</tr>
-				<tr>
-					<td><form:label path="tanggal">Tanggal: </form:label></td>
-					<td><form:input path="tanggal" /></td>
-				</tr>
-				<tr>
-					<td><form:label path="kuota">Kuota: </form:label></td>
-					<td><form:input path="kuota" /></td>
-				</tr>
-				<tr>
-					<td />
-					<td><input type="submit" value="Cari" /> <a href="/fp">Tampilkan
-							Semua</a></td>
-				</tr>
-			</tbody>
-		</table>
-	</form:form>
-
-	<table border="1">
-		<tbody>
-			<tr>
-				<td><b>Kota Asal</b></td>
-				<td><b>Kota Tujuan</b></td>
-				<td><b>Tanggal</b></td>
-				<td><b>Waktu</b></td>
-				<td><b>Kuota</b></td>
-				<c:if test="${anggotaObj!=null}">
-					<td />
-				</c:if>
-			</tr>
-			<c:forEach var="jadwal" items="${jadwals}">
-				<tr>
-					<td><c:out value="${jadwal.kotaAsal}"></c:out></td>
-					<td><c:out value="${jadwal.kotaTujuan}"></c:out></td>
-					<td><c:out value="${jadwal.tanggal}"></c:out></td>
-					<td><c:out value="${jadwal.waktu}"></c:out></td>
-					<td><c:out value="${jadwal.kuota}"></c:out></td>
-					<c:if test="${anggotaObj!=null}">
-						<td><input type="submit" value="Book"
-							onclick="window.location.href='book/${jadwal.id}'" /></td>
+					<td><b>Kota Asal</b></td>
+					<td><b>Kota Tujuan</b></td>
+					<td><b>Tanggal</b></td>
+					<td><b>Waktu</b></td>
+					<td><b>Sisa Kuota</b></td>
+					<td><b>Harga</b></td>
+					<c:if test="${anggotaObj.tipe=='user'}">
+						<td />
 					</c:if>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<c:if test="${anggotaObj==null}">
-		<h3>Silahkan Login/Register untuk Booking</h3>
+				<c:forEach var="jadwal" items="${jadwals}">
+					<tr>
+						<td><c:out value="${jadwal.kotaAsal}"></c:out></td>
+						<td><c:out value="${jadwal.kotaTujuan}"></c:out></td>
+						<td><c:out value="${jadwal.tanggal}"></c:out></td>
+						<td><c:out value="${jadwal.waktu}"></c:out></td>
+						<td><c:out value="${jadwal.kuota}"></c:out></td>
+						<td><c:out value="${jadwal.harga}"></c:out></td>
+						<c:if test="${anggotaObj.tipe=='user'}">
+							<td><input type="submit" value="Book"
+								onclick="window.location.href='book/${jadwal.id}'" /></td>
+						</c:if>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<c:if test="${anggotaObj==null}">
+			<h3>Silahkan Login/Register untuk Booking</h3>
+		</c:if>
 	</c:if>
 </body>
 </html>

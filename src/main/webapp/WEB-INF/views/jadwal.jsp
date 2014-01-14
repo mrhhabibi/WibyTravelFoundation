@@ -17,10 +17,11 @@
 		<tbody>
 			<tr>
 				<td><b>Kota Asal</b></td>
-				<td><b>Kota Tujaun</b></td>
+				<td><b>Kota Tujuan</b></td>
 				<td><b>Tanggal</b></td>
 				<td><b>Waktu</b></td>
 				<td><b>Kuota</b></td>
+				<td><b>Harga</b></td>
 				<c:if test="${anggotaObj!=null}">
 					<td />
 				</c:if>
@@ -32,6 +33,7 @@
 					<td><c:out value="${jadwal.tanggal}"></c:out></td>
 					<td><c:out value="${jadwal.waktu}"></c:out></td>
 					<td><c:out value="${jadwal.kuota}"></c:out></td>
+					<td><c:out value="${jadwal.harga}"></c:out></td>
 					<td><a href="jadwal/hapus/${jadwal.id}">Hapus</a></td>
 				</tr>
 			</c:forEach>
@@ -61,6 +63,10 @@
 				<tr>
 					<td><form:label path="kuota">Kuota: </form:label></td>
 					<td><form:input path="kuota" /></td>
+				</tr>
+				<tr>
+					<td><form:label path="harga">Harga: </form:label></td>
+					<td><form:input path="harga" /></td>
 				</tr>
 				<tr>
 					<td />

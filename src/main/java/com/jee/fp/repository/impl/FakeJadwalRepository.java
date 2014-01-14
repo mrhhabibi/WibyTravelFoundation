@@ -14,13 +14,13 @@ public class FakeJadwalRepository implements JadwalRepository {
 
 	public FakeJadwalRepository() {
 		this.jadwals.add(new Jadwal(1, "Gresik", "Bali", "12/3/2013", "12.00",
-				30));
+				30, 500000));
 		this.jadwals.add(new Jadwal(2, "Surabaya", "Bandung", "2/5/2013",
-				"03.00", 90));
+				"03.00", 90, 300000));
 		this.jadwals.add(new Jadwal(3, "Kediri", "Bengkulu", "11/4/2014",
-				"11.30", 20));
+				"11.30", 20, 250000));
 		this.jadwals.add(new Jadwal(4, "Jakarta", "Banyuwangi", "13/3/2014",
-				"00.30", 10));
+				"00.30", 10, 100000));
 	}
 
 	@Override
@@ -47,9 +47,9 @@ public class FakeJadwalRepository implements JadwalRepository {
 			int kuota) {
 		List<Jadwal> jadwalFilter = new ArrayList<Jadwal>();
 		jadwalFilter.add(new Jadwal(1, "Gresik", "Bali", "12/3/2013", "12.00",
-				30));
+				30, 500000));
 		jadwalFilter.add(new Jadwal(2, "Surabaya", "Bandung", "2/5/2013",
-				"03.00", 90));
+				"03.00", 90, 300000));
 		return jadwalFilter;
 	}
 

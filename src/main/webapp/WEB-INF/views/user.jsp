@@ -18,11 +18,11 @@
 		onclick="window.location.href='/fp/login'" />
 	<br>
 	<c:choose>
-		<c:when test="${transaksiBean.batas == null}">
+		<c:when test="${bookingBean.batas == null}">
 			<h2>Silahkan menuju halaman awal untuk melakukan booking</h2>
 		</c:when>
 		<c:otherwise>
-			<h2>Remainder : Waktu anda melakukan pembayaran hingga
+			<h2>Reminder : Waktu anda melakukan pembayaran hingga
 				${transaksiBean.batas}</h2>
 			<input type="submit" value="Batal"
 				onclick="window.location.href='/fp/book/batal'" />
