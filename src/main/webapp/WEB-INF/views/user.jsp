@@ -11,7 +11,7 @@
 <title>Profil</title>
 </head>
 <body>
-	<h1>Selamat Datang ${what.nama}</h1>
+	<h1>Selamat Datang ${anggotaObj.nama}</h1>
 
 	<c:if test="${bookingBean.batas == null}">
 		<input type="submit" value="Book Something"
@@ -59,14 +59,16 @@
 				<td><b>Tanggal</b></td>
 				<td><b>Kuota</b></td>
 				<td><b>Harga</b></td>
+				<td><b>Status</b></td>
 			</tr>
-			<c:forEach var="transaksi" items="${transaksis}">
+			<c:forEach var="trans" items="${transaksis}">
 				<tr>
-					<td><c:out value="${transaksis.jadwal.kotaAsal}"></c:out></td>
-					<td><c:out value="${transaksis.jadwal.kotaTujuan}"></c:out></td>
-					<td><c:out value="${transaksis.jadwal.tanggal}"></c:out></td>
-					<td><c:out value="${transaksis.kuota}"></c:out></td>
-					<td><c:out value="${transaksis.jadwal.harga}"></c:out></td>
+					<td><c:out value="${trans.jadwal.kotaAsal}"></c:out></td>
+					<td><c:out value="${trans.jadwal.kotaTujuan}"></c:out></td>
+					<td><c:out value="${trans.jadwal.tanggal}"></c:out></td>
+					<td><c:out value="${trans.kuota}"></c:out></td>
+					<td><c:out value="${trans.jadwal.harga}"></c:out></td>
+					<td>Passed</td>
 				</tr>
 			</c:forEach>
 		</tbody>

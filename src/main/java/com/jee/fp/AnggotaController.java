@@ -1,6 +1,7 @@
 package com.jee.fp;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -91,7 +92,8 @@ public class AnggotaController {
 		ModelAndView mv = new ModelAndView("user");
 		mv.addObject("bookingBean",
 				this.bookingRepository.getData(anggota.getEmail()));
-		mv.addObject("transaksis",this.transaksiRepository.getHistory(anggota.getEmail()));
+		mv.addObject("transaksis",
+				this.transaksiRepository.getHistory(anggota.getEmail()));
 		return mv;
 	}
 
@@ -106,8 +108,9 @@ public class AnggotaController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("jadwals", this.jadwalRepository.getData());
+		mv.addObject("jadwals", new ArrayList<Jadwal>());
 		mv.addObject("jadwalBean", new Jadwal());
+		mv.addObject("banyakKuota", 0);
 		mv.addObject("kotaList", this.jadwalRepository.getKota());
 		return mv;
 	}
@@ -115,20 +118,24 @@ public class AnggotaController {
 	@RequestMapping(value = "/filterjadwal", method = RequestMethod.POST)
 	public ModelAndView filterJadwal(@ModelAttribute Jadwal jadwal) {
 		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("jadwalBean", new Jadwal());
+		mv.addObject("jadwalBean", jadwal);
 		mv.addObject("kotaList", this.jadwalRepository.getKota());
+		mv.addObject("banyakKuota", jadwal.getKuota());
 		mv.addObject("jadwals",
 				this.jadwalRepository.getData(null, null, null, 0));
 		return mv;
 	}
 
-	@RequestMapping(value = "/book/{jadwalId}", method = RequestMethod.GET)
-	public ModelAndView bookJadwal(@PathVariable("jadwalId") int jadwalId) {
+	@RequestMapping(value = "/book/{jadwalId}/{jmlKuota}", method = RequestMethod.GET)
+	public ModelAndView bookJadwal(@PathVariable("jadwalId") int jadwalId,
+			@PathVariable("jmlKuota") int jmlKuota) {
 		ModelAndView mv = new ModelAndView("book");
 		mv.addObject("jadwalBean", this.jadwalRepository.getData(jadwalId));
 		mv.addObject("bookingBean",
 				new Booking(null, this.jadwalRepository.getData(jadwalId), "",
-						"", "", 2));
+						"", "", jmlKuota));
+		mv.addObject("totalHarga", this.jadwalRepository.getData(jadwalId)
+				.getHarga() * jmlKuota);
 		return mv;
 	}
 
@@ -175,13 +182,17 @@ public class AnggotaController {
 	}
 
 	@RequestMapping(value = "/jadwal")
-	public ModelAndView bookJadwal() {
+	public ModelAndView bookJadwal(@ModelAttribute("anggotaObj") Anggota anggota) {
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("jadwal");
-		mv.addObject("jadwals", this.jadwalRepository.getData());
-		mv.addObject("jadwalBean", new Jadwal());
-		mv.addObject("kotaList", this.jadwalRepository.getKota());
+		if (anggota.getTipe() == "admin") {
+			mv.setViewName("jadwal");
+			mv.addObject("jadwals", this.jadwalRepository.getData());
+			mv.addObject("jadwalBean", new Jadwal());
+			mv.addObject("kotaList", this.jadwalRepository.getKota());
+		} else {
+			mv.setViewName("redirect:/");
+		}
 		return mv;
 	}
 

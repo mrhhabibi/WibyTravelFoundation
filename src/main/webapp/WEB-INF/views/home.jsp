@@ -60,45 +60,53 @@
 					</tr>
 					<tr>
 						<td />
-						<td><input type="submit" value="Cari" /> <a href="/fp">Tampilkan
-								Semua</a></td>
+						<td><input type="submit" value="Cari" />
 					</tr>
 				</tbody>
 			</table>
 		</form:form>
 
-		<table border="1">
-			<tbody>
-				<tr>
-					<td><b>Kota Asal</b></td>
-					<td><b>Kota Tujuan</b></td>
-					<td><b>Tanggal</b></td>
-					<td><b>Waktu</b></td>
-					<td><b>Sisa Kuota</b></td>
-					<td><b>Harga</b></td>
-					<c:if test="${anggotaObj.tipe=='user'}">
-						<td />
-					</c:if>
-				</tr>
-				<c:forEach var="jadwal" items="${jadwals}">
+		<c:if test="${jadwals.size() > 0 }">
+			<table border="1">
+				<tbody>
 					<tr>
-						<td><c:out value="${jadwal.kotaAsal}"></c:out></td>
-						<td><c:out value="${jadwal.kotaTujuan}"></c:out></td>
-						<td><c:out value="${jadwal.tanggal}"></c:out></td>
-						<td><c:out value="${jadwal.waktu}"></c:out></td>
-						<td><c:out value="${jadwal.kuota}"></c:out></td>
-						<td><c:out value="${jadwal.harga}"></c:out></td>
+						<td><b>Kota Asal</b></td>
+						<td><b>Kota Tujuan</b></td>
+						<td><b>Tanggal</b></td>
+						<td><b>Waktu</b></td>
+						<td><b>Sisa Kuota</b></td>
+						<td><b>Harga</b></td>
 						<c:if test="${anggotaObj.tipe=='user'}">
-							<td><input type="submit" value="Book"
-								onclick="window.location.href='book/${jadwal.id}'" /></td>
+							<td />
 						</c:if>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<c:if test="${anggotaObj.tipe!=user && anggotaObj.tipe!=admin}">
-			<h3>Silahkan Login/Register untuk Booking</h3>
+					<c:forEach var="jadwal" items="${jadwals}">
+						<tr>
+							<td><c:out value="${jadwal.kotaAsal}"></c:out></td>
+							<td><c:out value="${jadwal.kotaTujuan}"></c:out></td>
+							<td><c:out value="${jadwal.tanggal}"></c:out></td>
+							<td><c:out value="${jadwal.waktu}"></c:out></td>
+							<td><c:out value="${jadwal.kuota}"></c:out></td>
+							<td><c:out value="${jadwal.harga}"></c:out></td>
+							<c:if test="${anggotaObj.tipe=='user'}">
+								<td><input type="submit" value="Book"
+									onclick="window.location.href='book/${jadwal.id}/${banyakKuota}'" /></td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</c:if>
+		<c:choose>
+			<c:when test="${anggotaObj.tipe=='user'}">
+				<h3>Happy Travelling ${anggotaObj.nama }</h3>
+			</c:when>
+			<c:when test="${anggotaObj.tipe=='admin'}">
+			</c:when>
+			<c:otherwise>
+				<h3>Silahkan Login/Register untuk Booking</h3>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 </body>
 </html>

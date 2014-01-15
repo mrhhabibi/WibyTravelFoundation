@@ -34,7 +34,7 @@
 				</tr>
 				<tr>
 					<td><form:label path="harga">Harga: </form:label></td>
-					<td><form:label path="harga" />${jadwalBean.harga}</td>
+					<td><form:label path="harga" />${totalHarga}</td>
 				</tr>
 			</form:form>
 			<form:form method="post" action="bookNow" commandName="bookingBean">

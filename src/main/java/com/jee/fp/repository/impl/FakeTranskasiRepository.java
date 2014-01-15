@@ -15,8 +15,8 @@ public class FakeTranskasiRepository implements TransaksiRepository {
 
 	private List<Transaksi> transaksis = new ArrayList<Transaksi>();
 
-	@Override
-	public List<Transaksi> getData() {
+	public FakeTranskasiRepository()
+	{
 		transaksis.add(new Transaksi(1, new Jadwal(1, "as", "sd", "12/12/12",
 				"12:12", 12, 12), new Anggota("qwe", "qwe", "qwe", "123",
 				"user"), 12));
@@ -29,6 +29,10 @@ public class FakeTranskasiRepository implements TransaksiRepository {
 		transaksis.add(new Transaksi(4, new Jadwal(4, "as", "sd", "12/12/12",
 				"12:12", 12, 12), new Anggota("qwe", "qwe", "qwe", "123",
 				"user"), 12));
+	}
+	
+	@Override
+	public List<Transaksi> getData() {
 		return transaksis;
 	}
 
