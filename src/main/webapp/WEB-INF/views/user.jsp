@@ -11,7 +11,7 @@
 <title>Profil</title>
 </head>
 <body>
-	<h1>Selamat Datang ${anggotaObj.nama}</h1>
+	<h1>Selamat Datang ${what.nama}</h1>
 
 	<c:if test="${bookingBean.batas == null}">
 		<input type="submit" value="Book Something"
@@ -25,13 +25,51 @@
 			<h2>Silahkan menuju halaman awal untuk melakukan booking</h2>
 		</c:when>
 		<c:otherwise>
-			<h2>Reminder : Waktu anda melakukan pembayaran hingga
-				${bookingBean.batas}</h2>
+			<td><h1>Reminder</h1></td>
+			<h2>Waktu anda melakukan pembayaran hingga ${bookingBean.batas}</h2>
+			<table>
+				<tr>
+					<td>Dari rekening</td>
+					<td>${bookingBean.rekening }</td>
+				</tr>
+				<tr>
+					<td>Atas nama</td>
+					<td>${bookingBean.an }</td>
+				</tr>
+				<tr>
+					<td>Ke rekening</td>
+					<td>081515941406</td>
+				</tr>
+				<tr>
+					<td>Atas nama</td>
+					<td>Wiby Punya</td>
+				</tr>
+			</table>
 			<input type="submit" value="Konfimarsi"
 				onclick="window.location.href='/fp/book/batal'" />
 			<input type="submit" value="Batal"
 				onclick="window.location.href='/fp/book/batal'" />
 		</c:otherwise>
 	</c:choose>
+	<table border="1">
+		<tbody>
+			<tr>
+				<td><b>Kota Asal</b></td>
+				<td><b>Kota Tujuan</b></td>
+				<td><b>Tanggal</b></td>
+				<td><b>Kuota</b></td>
+				<td><b>Harga</b></td>
+			</tr>
+			<c:forEach var="transaksi" items="${transaksis}">
+				<tr>
+					<td><c:out value="${transaksis.jadwal.kotaAsal}"></c:out></td>
+					<td><c:out value="${transaksis.jadwal.kotaTujuan}"></c:out></td>
+					<td><c:out value="${transaksis.jadwal.tanggal}"></c:out></td>
+					<td><c:out value="${transaksis.kuota}"></c:out></td>
+					<td><c:out value="${transaksis.jadwal.harga}"></c:out></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>

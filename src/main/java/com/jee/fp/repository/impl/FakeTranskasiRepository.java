@@ -37,4 +37,9 @@ public class FakeTranskasiRepository implements TransaksiRepository {
 		transaksis.add(transaksi);
 	}
 
+	@Override
+	public List<Transaksi> getHistory(String email) {
+		return transaksis;
+	}
+
 }

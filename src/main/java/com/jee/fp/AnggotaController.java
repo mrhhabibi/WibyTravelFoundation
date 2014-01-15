@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jee.fp.domain.Anggota;
 import com.jee.fp.domain.Booking;
 import com.jee.fp.domain.Jadwal;
-import com.jee.fp.domain.Transaksi;
 import com.jee.fp.repository.AnggotaRepository;
+import com.jee.fp.repository.BankRepository;
 import com.jee.fp.repository.BookingRepository;
 import com.jee.fp.repository.JadwalRepository;
 import com.jee.fp.repository.TransaksiRepository;
@@ -34,6 +34,8 @@ public class AnggotaController {
 	private BookingRepository bookingRepository;
 	@Autowired
 	private TransaksiRepository transaksiRepository;
+	@Autowired
+	private BankRepository bankRepository;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView loginAnggota() {
@@ -56,9 +58,9 @@ public class AnggotaController {
 		if (temp != null) {
 			mv.addObject("anggotaObj", temp);
 			if (temp.getTipe() == "user") {
-				mv.setViewName("user");
+				mv.setViewName("redirect:/user");
 			} else {
-				mv.setViewName("home");
+				mv.setViewName("redirect:/");
 				mv.addObject("jadwalBean", new Jadwal());
 			}
 		} else {
@@ -84,16 +86,20 @@ public class AnggotaController {
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public ModelAndView userProfile() {
+	public ModelAndView userProfile(
+			@ModelAttribute("anggotaObj") Anggota anggota) {
 		ModelAndView mv = new ModelAndView("user");
-		mv.addObject("bookingBean", new Booking());
+		mv.addObject("bookingBean",
+				this.bookingRepository.getData(anggota.getEmail()));
+		mv.addObject("transaksis",this.transaksiRepository.getHistory(anggota.getEmail()));
 		return mv;
 	}
 
 	@RequestMapping(value = "/logout")
 	public ModelAndView logoutProcess() {
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("anggotaObj", false);
+		ModelAndView mv = new ModelAndView("redirect:/");
+		mv.addObject("anggotaObj", new Anggota());
+		mv.addObject("jadwalBean", new Jadwal());
 		return mv;
 	}
 
@@ -116,19 +122,21 @@ public class AnggotaController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/book/{jadwalId}")
+	@RequestMapping(value = "/book/{jadwalId}", method = RequestMethod.GET)
 	public ModelAndView bookJadwal(@PathVariable("jadwalId") int jadwalId) {
 		ModelAndView mv = new ModelAndView("book");
 		mv.addObject("jadwalBean", this.jadwalRepository.getData(jadwalId));
 		mv.addObject("bookingBean",
 				new Booking(null, this.jadwalRepository.getData(jadwalId), "",
-						"", "",2));
+						"", "", 2));
 		return mv;
 	}
 
 	@RequestMapping(value = "/book/bookNow")
-	public ModelAndView bookTransaksi(@ModelAttribute Booking booking) {
-		ModelAndView mv = new ModelAndView("user");
+	public ModelAndView bookTransaksi(
+			@ModelAttribute("anggotaObj") Anggota anggota,
+			@ModelAttribute Booking booking) {
+		ModelAndView mv = new ModelAndView("redirect:/user");
 
 		SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyy HH:mm");
 		Date time1 = new Date();
@@ -137,15 +145,32 @@ public class AnggotaController {
 		cal.add(Calendar.HOUR_OF_DAY, 1);
 		time1 = cal.getTime();
 		booking.setBatas(parser.format(time1));
-		
-		mv.addObject("bookingBean", booking);
+		booking.setAnggota(anggota);
+		this.bookingRepository.tambah(booking);
+		mv.addObject("bookingBean",
+				this.bookingRepository.getData(anggota.getEmail()));
+		return mv;
+	}
+
+	@RequestMapping(value = "/book/konfirmasi")
+	public ModelAndView konfirmasiTransaksi(
+			@ModelAttribute("anggotaObj") Anggota anggota) {
+		ModelAndView mv = new ModelAndView("redirect:/user");
+		if (this.bankRepository.validate(this.bookingRepository.getData(anggota
+				.getEmail())) == true)
+			this.bookingRepository.hapus(anggota.getEmail());
+		mv.addObject("transaksiBean",
+				this.bookingRepository.getData(anggota.getEmail()));
 		return mv;
 	}
 
 	@RequestMapping(value = "/book/batal")
-	public ModelAndView batalTransaksi() {
-		ModelAndView mv = new ModelAndView("user");
-		mv.addObject("transaksiBean", new Transaksi());
+	public ModelAndView batalTransaksi(
+			@ModelAttribute("anggotaObj") Anggota anggota) {
+		ModelAndView mv = new ModelAndView("redirect:/user");
+		this.bookingRepository.hapus(anggota.getEmail());
+		mv.addObject("transaksiBean",
+				this.bookingRepository.getData(anggota.getEmail()));
 		return mv;
 	}
 

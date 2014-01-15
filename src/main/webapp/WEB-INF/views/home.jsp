@@ -13,9 +13,11 @@
 <body>
 	<h1>Wiby Travel Foundation</h1>
 	<c:choose>
-		<c:when test="${anggotaObj == null}">
-			<input type="submit" value="Login/Register"
-				onclick="window.location.href='/fp/login'" />
+		<c:when test="${anggotaObj.tipe=='user'}">
+			<input type="submit" value="Profil"
+				onclick="window.location.href='/fp/user'" />
+			<input type="submit" value="Logout"
+				onclick="window.location.href='/fp/logout'" />
 		</c:when>
 		<c:when test="${anggotaObj.tipe=='admin'}">
 			<input type="submit" value="Jadwal"
@@ -28,10 +30,8 @@
 				onclick="window.location.href='/fp/logout'" />
 		</c:when>
 		<c:otherwise>
-			<input type="submit" value="Profil"
-				onclick="window.location.href='/fp/user'" />
-			<input type="submit" value="Logout"
-				onclick="window.location.href='/fp/logout'" />
+			<input type="submit" value="Login/Register"
+				onclick="window.location.href='/fp/login'" />
 		</c:otherwise>
 	</c:choose>
 	<c:if test="${anggotaObj.tipe!='admin'}">
@@ -56,7 +56,7 @@
 					</tr>
 					<tr>
 						<td><form:label path="kuota">Kuota: </form:label></td>
-						<td><form:input path="kuota" /></td>
+						<td><form:input id="kuotaId" path="kuota" /></td>
 					</tr>
 					<tr>
 						<td />
@@ -96,7 +96,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<c:if test="${anggotaObj==null}">
+		<c:if test="${anggotaObj.tipe!=user && anggotaObj.tipe!=admin}">
 			<h3>Silahkan Login/Register untuk Booking</h3>
 		</c:if>
 	</c:if>

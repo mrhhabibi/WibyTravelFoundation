@@ -32,6 +32,10 @@
 					<td><form:label path="waktu">Waktu: </form:label></td>
 					<td><form:label path="waktu" />${jadwalBean.waktu}</td>
 				</tr>
+				<tr>
+					<td><form:label path="harga">Harga: </form:label></td>
+					<td><form:label path="harga" />${jadwalBean.harga}</td>
+				</tr>
 			</form:form>
 			<form:form method="post" action="bookNow" commandName="bookingBean">
 				<tr>
