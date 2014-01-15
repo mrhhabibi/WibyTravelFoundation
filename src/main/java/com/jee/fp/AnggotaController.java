@@ -143,7 +143,9 @@ public class AnggotaController {
 	public ModelAndView bookTransaksi(
 			@ModelAttribute("anggotaObj") Anggota anggota,
 			@ModelAttribute Booking booking) {
-		ModelAndView mv = new ModelAndView("redirect:/user");
+		ModelAndView mv = new ModelAndView("user");
+		mv.addObject("transaksis",
+				this.transaksiRepository.getHistory(anggota.getEmail()));
 
 		SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyy HH:mm");
 		Date time1 = new Date();

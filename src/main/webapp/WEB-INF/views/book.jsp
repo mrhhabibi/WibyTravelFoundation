@@ -15,7 +15,7 @@
 
 	<table>
 		<tbody>
-			<form:form method="post" action="bookNow" commandName="jadwalBean">
+			<form:form method="post" action="../../book/bookNow" commandName="jadwalBean">
 				<tr>
 					<td><form:label path="kotaAsal">Kota Asal: </form:label></td>
 					<td><form:label path="kotaAsal" />${jadwalBean.kotaAsal}</td>
@@ -37,7 +37,7 @@
 					<td><form:label path="harga" />${totalHarga}</td>
 				</tr>
 			</form:form>
-			<form:form method="post" action="bookNow" commandName="bookingBean">
+			<form:form method="post" action="../../book/bookNow" commandName="bookingBean">
 				<tr>
 					<td><form:label path="kuota">Kuota: </form:label></td>
 					<td><form:label path="kuota" />${bookingBean.kuota}</td>
